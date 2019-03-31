@@ -1,0 +1,24 @@
+{
+  "name": "video-seller-server",
+  "version": "1.0.0",
+  "description": "Awesome video-seller-server",
+  "main": "index.js",
+  "repository": "https://github.com/jodnddus/video-seller-server",
+  "author": "jodnddus <lockhost23@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "express": "^4.16.4",
+    "graphql-yoga": "^1.17.4",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "body-parser": "^1.18.3"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js"
+  }
+}
