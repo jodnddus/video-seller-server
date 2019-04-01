@@ -3,9 +3,16 @@ type Users {
     username: String!
     password: String!
     email: String!
+    moviecode: [Int]!
+}
+type Videos {
+    id: Int!
+    name: String!
+    price: Int!
 }
 
 type Query {
     users: [Users]!
+    videos: [Videos]!
     user(id: Int!): Users
 }
