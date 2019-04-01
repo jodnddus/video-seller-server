@@ -16,3 +16,7 @@ type Query {
     videos: [Videos]!
     user(id: Int!): Users
 }
+
+type Mutation {
+    signUpUser(username: String!, email: String!, password: String!): Users!
+}
