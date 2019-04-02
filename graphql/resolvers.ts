@@ -2,13 +2,14 @@ import { Arg, Resolver, Query, Mutation } from 'type-graphql';
 import { getUsers, getVideos, getById, signUpUser, signInUser } from './db';
 import usersSchema from './schemas/userSchema';
 import videoSchema from './schemas/videoSchema';
+import { Users, userData } from './data/user';
+import { Videos, videoData } from './data/video';
 import 'reflect-metadata';
 
 
 @Resolver(of => usersSchema)
-class videoSeller {
+export default class videoSeller {
     constructor(private videoService: videoSeller) {}
-
     @Query(returns => usersSchema, { nullable: true })
     users() {
         getUsers();

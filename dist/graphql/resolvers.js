@@ -74,5 +74,6 @@ videoSeller = __decorate([
     type_graphql_1.Resolver(of => userSchema_1.default),
     __metadata("design:paramtypes", [videoSeller])
 ], videoSeller);
+exports.default = videoSeller;
 ;
 //# sourceMappingURL=resolvers.js.map
