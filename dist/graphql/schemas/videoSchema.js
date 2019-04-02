@@ -11,22 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
 require("reflect-metadata");
-let users = class users {
+let videos = class videos {
 };
 __decorate([
     type_graphql_1.Field(type => type_graphql_1.Int),
     __metadata("design:type", Number)
-], users.prototype, "id", void 0);
+], videos.prototype, "id", void 0);
 __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
-], users.prototype, "name", void 0);
+], videos.prototype, "name", void 0);
 __decorate([
     type_graphql_1.Field(type => type_graphql_1.Int),
     __metadata("design:type", Number)
-], users.prototype, "price", void 0);
-users = __decorate([
+], videos.prototype, "price", void 0);
+videos = __decorate([
     type_graphql_1.ObjectType()
-], users);
-exports.default = users;
+], videos);
+exports.default = videos;
 //# sourceMappingURL=videoSchema.js.map

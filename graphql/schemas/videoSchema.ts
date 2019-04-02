@@ -2,7 +2,7 @@ import { Field, Int, ObjectType} from 'type-graphql';
 import 'reflect-metadata';
 
 @ObjectType()
-export default class users {
+export default class videos {
     @Field(type => Int)
     id: number;
 
