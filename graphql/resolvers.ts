@@ -1,14 +1,36 @@
-import { getUsers, getVideos, getById } from './db';
+import { Arg, Resolver, Query, Mutation } from 'type-graphql';
+import { getUsers, getVideos, getById, signUpUser, signInUser } from './db';
+import usersSchema from './schemas/userSchema';
+import videoSchema from './schemas/videoSchema';
+import 'reflect-metadata';
 
-const resolvers = {
-    Query: {
-        users: () => getUsers(),
-        videos: () => getVideos(),
-        user: (_, { id }) => getById(id)
-    },
-    Mutation: {
-        signUpUser(_, { username, email, password }) => 
+
+@Resolver(of => usersSchema)
+class videoSeller {
+    constructor(private videoService: videoSeller) {}
+
+    @Query(returns => usersSchema, { nullable: true })
+    users() {
+        getUsers();
+    }
+
+    @Query(returns => videoSchema, { nullable: true })
+    videos() {
+        getVideos();
+    }
+
+    @Query(returns => usersSchema, { nullable: true })
+    user(@Arg("id") id: number) {
+        getById(id);
+    }
+
+    @Mutation(returns => usersSchema)
+    signUpUser(@Arg("username") username: string, @Arg("email") email: string, @Arg("password") password: string) {
+        signUpUser(username, email, password);
+    }
+
+    @Mutation(returns => usersSchema)
+    signInUser(@Arg("username") username: string, @Arg("email") email: string, @Arg("password") password: string) {
+        signInUser(username, email, password);
     }
 };
-
-export default resolvers;

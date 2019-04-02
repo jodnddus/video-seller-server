@@ -1,4 +1,10 @@
-let Videos = [
+interface videoData {
+    id: number,
+    name: string,
+    price: number
+}
+
+let Videos: videoData[] = [
     {
         id: 100,
         name: "부산행",
@@ -26,4 +32,4 @@ let Videos = [
     }
 ]
 
-export default Videos;
+export { Videos, videoData };
