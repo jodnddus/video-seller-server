@@ -25,6 +25,6 @@
     "babel-preset-stage-3": "^6.24.1"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node dist/index.js"
+    "start": "tsc | nodemon --exec babel-node dist/index.js"
   }
 }
