@@ -1,17 +1,17 @@
-import { Field, Int, ObjectType, buildSchema} from 'type-graphql';
+import { Field, Int, ObjectType} from 'type-graphql';
 import 'reflect-metadata';
 
 @ObjectType()
 export default class users {
-    @Field(type=> Int)
+    @Field(type=> Int, { nullable: true })
     id: number;
 
-    @Field()
+    @Field({ nullable: true })
     username: string;
 
-    @Field()
+    @Field({ nullable: true })
     email: string;
 
-    @Field()
+    @Field({ nullable: true })
     password: string;
 }

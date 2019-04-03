@@ -14,15 +14,15 @@ require("reflect-metadata");
 let videos = class videos {
 };
 __decorate([
-    type_graphql_1.Field(type => type_graphql_1.Int),
+    type_graphql_1.Field(type => type_graphql_1.Int, { nullable: true }),
     __metadata("design:type", Number)
 ], videos.prototype, "id", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    type_graphql_1.Field({ nullable: true }),
     __metadata("design:type", String)
 ], videos.prototype, "name", void 0);
 __decorate([
-    type_graphql_1.Field(type => type_graphql_1.Int),
+    type_graphql_1.Field(type => type_graphql_1.Int, { nullable: true }),
     __metadata("design:type", Number)
 ], videos.prototype, "price", void 0);
 videos = __decorate([

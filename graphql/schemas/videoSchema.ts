@@ -3,12 +3,12 @@ import 'reflect-metadata';
 
 @ObjectType()
 export default class videos {
-    @Field(type => Int)
+    @Field(type => Int, { nullable: true })
     id: number;
 
-    @Field()
+    @Field({ nullable: true })
     name: string;
 
-    @Field(type => Int)
+    @Field(type => Int, { nullable: true })
     price: number;
 }

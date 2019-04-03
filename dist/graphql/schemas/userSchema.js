@@ -14,19 +14,19 @@ require("reflect-metadata");
 let users = class users {
 };
 __decorate([
-    type_graphql_1.Field(type => type_graphql_1.Int),
+    type_graphql_1.Field(type => type_graphql_1.Int, { nullable: true }),
     __metadata("design:type", Number)
 ], users.prototype, "id", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    type_graphql_1.Field({ nullable: true }),
     __metadata("design:type", String)
 ], users.prototype, "username", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    type_graphql_1.Field({ nullable: true }),
     __metadata("design:type", String)
 ], users.prototype, "email", void 0);
 __decorate([
-    type_graphql_1.Field(),
+    type_graphql_1.Field({ nullable: true }),
     __metadata("design:type", String)
 ], users.prototype, "password", void 0);
 users = __decorate([

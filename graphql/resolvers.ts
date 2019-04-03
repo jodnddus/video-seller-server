@@ -1,37 +1,52 @@
 import { Arg, Resolver, Query, Mutation } from 'type-graphql';
-import { getUsers, getVideos, getById, signUpUser, signInUser } from './db';
 import usersSchema from './schemas/userSchema';
 import videoSchema from './schemas/videoSchema';
 import { Users, userData } from './data/user';
 import { Videos, videoData } from './data/video';
 import 'reflect-metadata';
 
-
-@Resolver(of => usersSchema)
+@Resolver()
 export default class videoSeller {
-    constructor(private videoService: videoSeller) {}
-    @Query(returns => usersSchema, { nullable: true })
+    private Users: userData[];
+    private Videos: videoData[];
+
+    constructor() {
+        this.Users = Users;
+        this.Videos = Videos;
+    }
+
+    @Query(() => [usersSchema])
     users() {
-        getUsers();
+        return this.Users;
     }
 
-    @Query(returns => videoSchema, { nullable: true })
+    @Query(() => [videoSchema])
     videos() {
-        getVideos();
+        return this.Videos;
     }
 
-    @Query(returns => usersSchema, { nullable: true })
+    @Query(() => usersSchema)
     user(@Arg("id") id: number) {
-        getById(id);
+        const filteredUsers = Users.filter(user => user.id === id);
+        return filteredUsers[0];
     }
 
-    @Mutation(returns => usersSchema)
+    @Mutation(() => usersSchema)
     signUpUser(@Arg("username") username: string, @Arg("email") email: string, @Arg("password") password: string) {
-        signUpUser(username, email, password);
+        const newUser: userData = {
+            id: Users.length + 1,
+            username,
+            password,
+            email,
+            videoId: []
+        };
+        Users.push(newUser);
+        return newUser;
     }
 
-    @Mutation(returns => usersSchema)
+    @Mutation(() => usersSchema)
     signInUser(@Arg("username") username: string, @Arg("email") email: string, @Arg("password") password: string) {
-        signInUser(username, email, password);
+        var searchedUser = Users.filter(user => user.username === username && user.email === email && user.password === password);
+        return searchedUser[0];
     }
 };

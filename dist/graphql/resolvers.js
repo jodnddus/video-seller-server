@@ -13,66 +13,78 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
-const db_1 = require("./db");
 const userSchema_1 = require("./schemas/userSchema");
 const videoSchema_1 = require("./schemas/videoSchema");
+const user_1 = require("./data/user");
+const video_1 = require("./data/video");
 require("reflect-metadata");
 let videoSeller = class videoSeller {
-    constructor(videoService) {
-        this.videoService = videoService;
+    constructor() {
+        this.Users = user_1.Users;
+        this.Videos = video_1.Videos;
     }
     users() {
-        db_1.getUsers();
+        return this.Users;
     }
     videos() {
-        db_1.getVideos();
+        return this.Videos;
     }
     user(id) {
-        db_1.getById(id);
+        const filteredUsers = user_1.Users.filter(user => user.id === id);
+        return filteredUsers[0];
     }
     signUpUser(username, email, password) {
-        db_1.signUpUser(username, email, password);
+        const newUser = {
+            id: user_1.Users.length + 1,
+            username,
+            password,
+            email,
+            videoId: []
+        };
+        user_1.Users.push(newUser);
+        return newUser;
     }
     signInUser(username, email, password) {
-        db_1.signInUser(username, email, password);
+        var searchedUser = user_1.Users.filter(user => user.username === username && user.email === email && user.password === password);
+        return searchedUser[0];
     }
 };
 __decorate([
-    type_graphql_1.Query(returns => userSchema_1.default, { nullable: true }),
+    type_graphql_1.Query(() => [userSchema_1.default]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], videoSeller.prototype, "users", null);
 __decorate([
-    type_graphql_1.Query(returns => videoSchema_1.default, { nullable: true }),
+    type_graphql_1.Query(() => [videoSchema_1.default]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], videoSeller.prototype, "videos", null);
 __decorate([
-    type_graphql_1.Query(returns => userSchema_1.default, { nullable: true }),
+    type_graphql_1.Query(() => userSchema_1.default),
     __param(0, type_graphql_1.Arg("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], videoSeller.prototype, "user", null);
 __decorate([
-    type_graphql_1.Mutation(returns => userSchema_1.default),
+    type_graphql_1.Mutation(() => userSchema_1.default),
     __param(0, type_graphql_1.Arg("username")), __param(1, type_graphql_1.Arg("email")), __param(2, type_graphql_1.Arg("password")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, String]),
     __metadata("design:returntype", void 0)
 ], videoSeller.prototype, "signUpUser", null);
 __decorate([
-    type_graphql_1.Mutation(returns => userSchema_1.default),
+    type_graphql_1.Mutation(() => userSchema_1.default),
     __param(0, type_graphql_1.Arg("username")), __param(1, type_graphql_1.Arg("email")), __param(2, type_graphql_1.Arg("password")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, String]),
     __metadata("design:returntype", void 0)
 ], videoSeller.prototype, "signInUser", null);
 videoSeller = __decorate([
-    type_graphql_1.Resolver(of => userSchema_1.default),
-    __metadata("design:paramtypes", [videoSeller])
+    type_graphql_1.Resolver(),
+    __metadata("design:paramtypes", [])
 ], videoSeller);
 exports.default = videoSeller;
 ;
