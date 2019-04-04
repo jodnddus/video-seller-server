@@ -29,6 +29,10 @@ __decorate([
     type_graphql_1.Field({ nullable: true }),
     __metadata("design:type", String)
 ], users.prototype, "password", void 0);
+__decorate([
+    type_graphql_1.Field(type => type_graphql_1.Int),
+    __metadata("design:type", Array)
+], users.prototype, "videoId", void 0);
 users = __decorate([
     type_graphql_1.ObjectType()
 ], users);

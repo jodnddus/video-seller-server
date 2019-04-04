@@ -14,4 +14,7 @@ export default class users {
 
     @Field({ nullable: true })
     password: string;
+
+    @Field(type => Int)
+    videoId: number[];
 }

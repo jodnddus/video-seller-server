@@ -2,7 +2,7 @@ interface videoData {
     id: number,
     name: string,
     price: number
-}
+};
 
 let Videos: videoData[] = [
     {
@@ -30,6 +30,6 @@ let Videos: videoData[] = [
         name: "곡성",
         price: 7000
     }
-]
+];
 
 export { Videos, videoData };

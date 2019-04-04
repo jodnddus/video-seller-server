@@ -4,7 +4,7 @@ interface userData {
     email: string,
     password: string,
     videoId: number[]
-}
+};
 
 let Users: userData[] = [
     {
