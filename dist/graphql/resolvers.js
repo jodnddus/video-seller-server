@@ -13,21 +13,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
+const node_fetch_1 = require("node-fetch");
 const userSchema_1 = require("./schemas/userSchema");
 const videoSchema_1 = require("./schemas/videoSchema");
 const user_1 = require("./data/user");
-const video_1 = require("./data/video");
 require("reflect-metadata");
 let videoSeller = class videoSeller {
     constructor() {
+        this.YTS_API = `https://yts.am/api/v2/list_movies.json`;
         this.Users = user_1.Users;
-        this.Videos = video_1.Videos;
     }
     users() {
         return this.Users;
     }
     videos() {
-        return this.Videos;
+        return node_fetch_1.default(this.YTS_API).then(res => res.json()).then(json => json.data.movies);
     }
     user(id) {
         const filteredUsers = user_1.Users.filter(user => user.id === id);

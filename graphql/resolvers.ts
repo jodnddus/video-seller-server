@@ -1,18 +1,19 @@
 import { Arg, Resolver, Query, Mutation } from 'type-graphql';
+import fetch from 'node-fetch';
 import usersSchema from './schemas/userSchema';
 import videoSchema from './schemas/videoSchema';
-import { Users, userData } from './data/user';
-import { Videos, videoData } from './data/video';
+import { Users } from './data/user';
 import 'reflect-metadata';
 
 @Resolver()
 export default class videoSeller {
-    private Users: userData[];
-    private Videos: videoData[];
+
+
+    public YTS_API = `https://yts.am/api/v2/list_movies.json`;
+    private Users: usersSchema[];
 
     constructor() {
         this.Users = Users;
-        this.Videos = Videos;
     }
 
     @Query(() => [usersSchema])
@@ -22,7 +23,7 @@ export default class videoSeller {
 
     @Query(() => [videoSchema])
     videos() {
-        return this.Videos;
+        return fetch(this.YTS_API).then(res => res.json()).then(json => json.data.movies);
     }
 
     @Query(() => usersSchema)
@@ -33,7 +34,7 @@ export default class videoSeller {
 
     @Mutation(() => usersSchema)
     signUpUser(@Arg("username") username: string, @Arg("email") email: string, @Arg("password") password: string) {
-        const newUser: userData = {
+        const newUser: usersSchema = {
             id: Users.length + 1,
             username,
             password,

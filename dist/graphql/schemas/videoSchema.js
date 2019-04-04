@@ -20,11 +20,27 @@ __decorate([
 __decorate([
     type_graphql_1.Field({ nullable: true }),
     __metadata("design:type", String)
-], videos.prototype, "name", void 0);
+], videos.prototype, "title", void 0);
 __decorate([
-    type_graphql_1.Field(type => type_graphql_1.Int, { nullable: true }),
+    type_graphql_1.Field(() => String, { nullable: true }),
+    __metadata("design:type", Array)
+], videos.prototype, "genres", void 0);
+__decorate([
+    type_graphql_1.Field(type => type_graphql_1.Float, { nullable: true }),
     __metadata("design:type", Number)
-], videos.prototype, "price", void 0);
+], videos.prototype, "rating", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], videos.prototype, "summary", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], videos.prototype, "language", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], videos.prototype, "medium_cover_image", void 0);
 videos = __decorate([
     type_graphql_1.ObjectType()
 ], videos);

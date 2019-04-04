@@ -7,10 +7,12 @@
   "author": "jodnddus <lockhost23@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/node-fetch": "^2.1.7",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "global": "^4.3.2",
     "graphql-yoga": "^1.17.4",
+    "node-fetch": "^2.3.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.1",
     "typescript": "^3.4.1"

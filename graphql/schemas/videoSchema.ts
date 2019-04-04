@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType} from 'type-graphql';
+import { Field, Int, ObjectType, Float} from 'type-graphql';
 import 'reflect-metadata';
 
 @ObjectType()
@@ -7,8 +7,20 @@ export default class videos {
     id: number;
 
     @Field({ nullable: true })
-    name: string;
+    title: string;
 
-    @Field(type => Int, { nullable: true })
-    price: number;
+    @Field(() => String, { nullable: true })
+    genres: string[];
+
+    @Field(type => Float, { nullable: true })
+    rating: number;
+
+    @Field({ nullable: true })
+    summary: string;
+
+    @Field({ nullable: true })
+    language: string;
+
+    @Field({ nullable: true})
+    medium_cover_image: string;
 }
