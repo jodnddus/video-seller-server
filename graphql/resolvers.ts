@@ -1,4 +1,4 @@
-import { Arg, Resolver, Query, Mutation } from 'type-graphql';
+import { Arg, Resolver, Query, Mutation, Float } from 'type-graphql';
 import fetch from 'node-fetch';
 import usersSchema from './schemas/userSchema';
 import videoSchema from './schemas/videoSchema';
@@ -8,8 +8,6 @@ import 'reflect-metadata';
 @Resolver()
 export default class videoSeller {
 
-
-    public YTS_API = `https://yts.am/api/v2/list_movies.json`;
     private Users: usersSchema[];
 
     constructor() {
@@ -22,8 +20,14 @@ export default class videoSeller {
     }
 
     @Query(() => [videoSchema])
-    videos() {
-        return fetch(this.YTS_API).then(res => res.json()).then(json => json.data.movies);
+    videos(@Arg("limit") limit: number) {
+        let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
+        if (limit > 0) {
+            YTS_API += `limit=${limit}`;
+        }
+        return fetch(YTS_API)
+            .then(res => res.json())
+            .then(json => json.data.movies);
     }
 
     @Query(() => usersSchema)

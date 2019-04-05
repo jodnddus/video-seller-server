@@ -20,14 +20,19 @@ const user_1 = require("./data/user");
 require("reflect-metadata");
 let videoSeller = class videoSeller {
     constructor() {
-        this.YTS_API = `https://yts.am/api/v2/list_movies.json`;
         this.Users = user_1.Users;
     }
     users() {
         return this.Users;
     }
-    videos() {
-        return node_fetch_1.default(this.YTS_API).then(res => res.json()).then(json => json.data.movies);
+    videos(limit) {
+        let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
+        if (limit > 0) {
+            YTS_API += `limit=${limit}`;
+        }
+        return node_fetch_1.default(YTS_API)
+            .then(res => res.json())
+            .then(json => json.data.movies);
     }
     user(id) {
         const filteredUsers = user_1.Users.filter(user => user.id === id);
@@ -57,8 +62,9 @@ __decorate([
 ], videoSeller.prototype, "users", null);
 __decorate([
     type_graphql_1.Query(() => [videoSchema_1.default]),
+    __param(0, type_graphql_1.Arg("limit")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], videoSeller.prototype, "videos", null);
 __decorate([
