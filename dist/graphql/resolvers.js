@@ -34,6 +34,14 @@ let videoSeller = class videoSeller {
             .then(res => res.json())
             .then(json => json.data.movies);
     }
+    videosById(id) {
+        let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
+        YTS_API += `movie_id=${id}`;
+        console.log(YTS_API);
+        return node_fetch_1.default(YTS_API)
+            .then(res => res.json())
+            .then(json => json.data.movies);
+    }
     user(id) {
         const filteredUsers = user_1.Users.filter(user => user.id === id);
         return filteredUsers[0];
@@ -67,6 +75,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], videoSeller.prototype, "videos", null);
+__decorate([
+    type_graphql_1.Query(() => [videoSchema_1.default]),
+    __param(0, type_graphql_1.Arg("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], videoSeller.prototype, "videosById", null);
 __decorate([
     type_graphql_1.Query(() => userSchema_1.default),
     __param(0, type_graphql_1.Arg("id")),

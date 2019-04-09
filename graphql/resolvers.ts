@@ -30,6 +30,17 @@ export default class videoSeller {
             .then(json => json.data.movies);
     }
 
+    @Query(() => [videoSchema])
+    videosById(@Arg("id") id: number) {
+        let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
+        YTS_API += `movie_id=${id}`;
+        console.log(YTS_API);
+
+        return fetch(YTS_API)
+            .then(res => res.json())
+            .then(json => json.data.movies);
+    }
+
     @Query(() => usersSchema)
     user(@Arg("id") id: number) {
         const filteredUsers = Users.filter(user => user.id === id);
