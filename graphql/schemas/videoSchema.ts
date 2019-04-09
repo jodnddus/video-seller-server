@@ -16,9 +16,6 @@ export default class videos {
     rating: number;
 
     @Field({ nullable: true })
-    summary: string;
-
-    @Field({ nullable: true })
     language: string;
 
     @Field({ nullable: true})

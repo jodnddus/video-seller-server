@@ -32,10 +32,6 @@ __decorate([
 __decorate([
     type_graphql_1.Field({ nullable: true }),
     __metadata("design:type", String)
-], videos.prototype, "summary", void 0);
-__decorate([
-    type_graphql_1.Field({ nullable: true }),
-    __metadata("design:type", String)
 ], videos.prototype, "language", void 0);
 __decorate([
     type_graphql_1.Field({ nullable: true }),
