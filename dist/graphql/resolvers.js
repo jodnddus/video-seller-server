@@ -54,6 +54,7 @@ let videoSeller = class videoSeller {
             });
             return movie;
         });
+<<<<<<< HEAD
     }
     videoSuggest(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -65,6 +66,8 @@ let videoSeller = class videoSeller {
             });
             return movies;
         });
+=======
+>>>>>>> 7054b46f116d7d15eee547cba86cbefd91da1679
     }
     user(id) {
         const filteredUsers = user_1.Users.filter(user => user.id === id);
