@@ -1,5 +1,5 @@
-import { Arg, Resolver, Query, Mutation, Float } from 'type-graphql';
-import fetch from 'node-fetch';
+import { Arg, Resolver, Query, Mutation } from 'type-graphql';
+import axios from 'axios';
 import usersSchema from './schemas/userSchema';
 import videoSchema from './schemas/videoSchema';
 import { Users } from './data/user';
@@ -20,25 +20,48 @@ export default class videoSeller {
     }
 
     @Query(() => [videoSchema])
-    videos(@Arg("limit") limit: number) {
+    async videos(@Arg("limit") limit: number) {
         let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
-        if (limit > 0) {
-            YTS_API += `limit=${limit}`;
-        }
-        return fetch(YTS_API)
-            .then(res => res.json())
-            .then(json => json.data.movies);
+        const {
+            data: {
+                data: { movies }
+            }
+        } = await axios(YTS_API, {
+            params: {
+                limit
+            }
+        });
+        return movies;
+    }
+
+    @Query(() => videoSchema)
+    async videosById(@Arg("id") id: number) {
+        let YTS_API = `https://yts.am/api/v2/movie_details.json?`;
+        const {
+            data: {
+                data: { movie }
+            }
+        } = await axios(YTS_API, {
+            params: {
+                movie_id: id
+            }
+        });
+        return movie;
     }
 
     @Query(() => [videoSchema])
-    videosById(@Arg("id") id: number) {
-        let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
-        YTS_API += `movie_id=${id}`;
-        console.log(YTS_API);
-
-        return fetch(YTS_API)
-            .then(res => res.json())
-            .then(json => json.data.movies);
+    async videoSuggest(@Arg("id") id: number) {
+        let YTS_API = `https://yts.am/api/v2/movie_suggestions.json?`;
+        const {
+            data: {
+                data: { movies }
+            }
+        } = await axios(YTS_API, {
+            params: {
+                movie_id: id
+            }
+        });
+        return movies;
     }
 
     @Query(() => usersSchema)
