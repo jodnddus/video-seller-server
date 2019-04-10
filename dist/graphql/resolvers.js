@@ -11,9 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
-const node_fetch_1 = require("node-fetch");
+const axios_1 = require("axios");
 const userSchema_1 = require("./schemas/userSchema");
 const videoSchema_1 = require("./schemas/videoSchema");
 const user_1 = require("./data/user");
@@ -26,21 +34,26 @@ let videoSeller = class videoSeller {
         return this.Users;
     }
     videos(limit) {
-        let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
-        if (limit > 0) {
-            YTS_API += `limit=${limit}`;
-        }
-        return node_fetch_1.default(YTS_API)
-            .then(res => res.json())
-            .then(json => json.data.movies);
+        return __awaiter(this, void 0, void 0, function* () {
+            let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
+            const { data: { data: { movies } } } = yield axios_1.default(YTS_API, {
+                params: {
+                    limit
+                }
+            });
+            return movies;
+        });
     }
     videosById(id) {
-        let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
-        YTS_API += `movie_id=${id}`;
-        console.log(YTS_API);
-        return node_fetch_1.default(YTS_API)
-            .then(res => res.json())
-            .then(json => json.data.movies);
+        return __awaiter(this, void 0, void 0, function* () {
+            let YTS_API = `https://yts.am/api/v2/movie_details.json?`;
+            const { data: { data: { movie } } } = yield axios_1.default(YTS_API, {
+                params: {
+                    movie_id: id
+                }
+            });
+            return movie;
+        });
     }
     user(id) {
         const filteredUsers = user_1.Users.filter(user => user.id === id);
@@ -73,14 +86,14 @@ __decorate([
     __param(0, type_graphql_1.Arg("limit")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], videoSeller.prototype, "videos", null);
 __decorate([
-    type_graphql_1.Query(() => [videoSchema_1.default]),
+    type_graphql_1.Query(() => videoSchema_1.default),
     __param(0, type_graphql_1.Arg("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], videoSeller.prototype, "videosById", null);
 __decorate([
     type_graphql_1.Query(() => userSchema_1.default),
