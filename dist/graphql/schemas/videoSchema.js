@@ -37,6 +37,10 @@ __decorate([
     type_graphql_1.Field({ nullable: true }),
     __metadata("design:type", String)
 ], videos.prototype, "medium_cover_image", void 0);
+__decorate([
+    type_graphql_1.Field({ nullable: true }),
+    __metadata("design:type", String)
+], videos.prototype, "description_intro", void 0);
 videos = __decorate([
     type_graphql_1.ObjectType()
 ], videos);

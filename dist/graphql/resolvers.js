@@ -33,7 +33,7 @@ let videoSeller = class videoSeller {
     users() {
         return this.Users;
     }
-    videos(limit) {
+    getvideos(limit) {
         return __awaiter(this, void 0, void 0, function* () {
             let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
             const { data: { data: { movies } } } = yield axios_1.default(YTS_API, {
@@ -44,7 +44,7 @@ let videoSeller = class videoSeller {
             return movies;
         });
     }
-    videosById(id) {
+    getVideoById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             let YTS_API = `https://yts.am/api/v2/movie_details.json?`;
             const { data: { data: { movie } } } = yield axios_1.default(YTS_API, {
@@ -53,17 +53,6 @@ let videoSeller = class videoSeller {
                 }
             });
             return movie;
-        });
-    }
-    videoSuggest(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let YTS_API = `https://yts.am/api/v2/movie_suggestions.json?`;
-            const { data: { data: { movies } } } = yield axios_1.default(YTS_API, {
-                params: {
-                    movie_id: id
-                }
-            });
-            return movies;
         });
     }
     user(id) {
@@ -98,21 +87,14 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], videoSeller.prototype, "videos", null);
+], videoSeller.prototype, "getvideos", null);
 __decorate([
     type_graphql_1.Query(() => videoSchema_1.default),
     __param(0, type_graphql_1.Arg("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], videoSeller.prototype, "videosById", null);
-__decorate([
-    type_graphql_1.Query(() => [videoSchema_1.default]),
-    __param(0, type_graphql_1.Arg("id")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
-], videoSeller.prototype, "videoSuggest", null);
+], videoSeller.prototype, "getVideoById", null);
 __decorate([
     type_graphql_1.Query(() => userSchema_1.default),
     __param(0, type_graphql_1.Arg("id")),

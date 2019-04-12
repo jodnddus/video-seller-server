@@ -20,4 +20,7 @@ export default class videos {
 
     @Field({ nullable: true})
     medium_cover_image: string;
+
+    @Field({ nullable: true })
+    description_intro: string;
 }

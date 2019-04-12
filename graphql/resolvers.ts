@@ -20,7 +20,7 @@ export default class videoSeller {
     }
 
     @Query(() => [videoSchema])
-    async videos(@Arg("limit") limit: number) {
+    async getvideos(@Arg("limit") limit: number) {
         let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
         const {
             data: {
@@ -35,7 +35,7 @@ export default class videoSeller {
     }
 
     @Query(() => videoSchema)
-    async videosById(@Arg("id") id: number) {
+    async getVideoById(@Arg("id") id: number) {
         let YTS_API = `https://yts.am/api/v2/movie_details.json?`;
         const {
             data: {
@@ -47,21 +47,6 @@ export default class videoSeller {
             }
         });
         return movie;
-    }
-
-    @Query(() => [videoSchema])
-    async videoSuggest(@Arg("id") id: number) {
-        let YTS_API = `https://yts.am/api/v2/movie_suggestions.json?`;
-        const {
-            data: {
-                data: { movies }
-            }
-        } = await axios(YTS_API, {
-            params: {
-                movie_id: id
-            }
-        });
-        return movies;
     }
 
     @Query(() => usersSchema)
