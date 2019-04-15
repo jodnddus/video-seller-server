@@ -55,6 +55,17 @@ let videoSeller = class videoSeller {
             return movie;
         });
     }
+    getVideoSuggest(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let YTS_API = `https://yts.am/api/v2/movie_suggestions.json?`;
+            const { data: { data: { movies } } } = yield axios_1.default(YTS_API, {
+                params: {
+                    movie_id: id
+                }
+            });
+            return movies;
+        });
+    }
     user(id) {
         const filteredUsers = user_1.Users.filter(user => user.id === id);
         return filteredUsers[0];
@@ -95,6 +106,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], videoSeller.prototype, "getVideoById", null);
+__decorate([
+    type_graphql_1.Query(() => [videoSchema_1.default]),
+    __param(0, type_graphql_1.Arg("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], videoSeller.prototype, "getVideoSuggest", null);
 __decorate([
     type_graphql_1.Query(() => userSchema_1.default),
     __param(0, type_graphql_1.Arg("id")),

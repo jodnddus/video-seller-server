@@ -49,6 +49,21 @@ export default class videoSeller {
         return movie;
     }
 
+    @Query(() => [videoSchema])
+    async getVideoSuggest(@Arg("id") id: number) {
+        let YTS_API = `https://yts.am/api/v2/movie_suggestions.json?`;
+        const {
+            data: {
+                data: { movies }
+            }
+        } = await axios(YTS_API, {
+            params: {
+                movie_id: id
+            }
+        });
+        return movies;
+    }
+
     @Query(() => usersSchema)
     user(@Arg("id") id: number) {
         const filteredUsers = Users.filter(user => user.id === id);
