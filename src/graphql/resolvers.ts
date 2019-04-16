@@ -70,6 +70,18 @@ export default class videoSeller {
         return filteredUsers[0];
     }
 
+    @Mutation(() => Boolean)
+    addStarVideo(@Arg("videoId") videoId: number, @Arg("userId") userId: number) {
+        try {
+            let user = this.user(userId);
+            user.videoId.push(videoId);
+            return true;
+        } catch(e) {
+            console.error(e);
+            return false;
+        }
+    }
+
     @Mutation(() => usersSchema)
     signUpUser(@Arg("username") username: string, @Arg("email") email: string, @Arg("password") password: string) {
         const newUser: usersSchema = {

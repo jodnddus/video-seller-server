@@ -70,6 +70,17 @@ let videoSeller = class videoSeller {
         const filteredUsers = user_1.Users.filter(user => user.id === id);
         return filteredUsers[0];
     }
+    addStarVideo(videoId, userId) {
+        try {
+            let user = this.user(userId);
+            user.videoId.push(videoId);
+            return true;
+        }
+        catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
     signUpUser(username, email, password) {
         const newUser = {
             id: user_1.Users.length + 1,
@@ -120,6 +131,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], videoSeller.prototype, "user", null);
+__decorate([
+    type_graphql_1.Mutation(() => Boolean),
+    __param(0, type_graphql_1.Arg("videoId")), __param(1, type_graphql_1.Arg("userId")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", void 0)
+], videoSeller.prototype, "addStarVideo", null);
 __decorate([
     type_graphql_1.Mutation(() => userSchema_1.default),
     __param(0, type_graphql_1.Arg("username")), __param(1, type_graphql_1.Arg("email")), __param(2, type_graphql_1.Arg("password")),
