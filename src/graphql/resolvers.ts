@@ -43,12 +43,9 @@ export default class videoSeller {
         return getUserById(id);
     }
 
-    @Query(() => Boolean)
+    @Mutation(() => Boolean)
     signInUser(@Arg("username") username: string, @Arg("email") email: string, @Arg("password") password: string) {
-        if(signInUser(username, email, password) === true)
-            return true;
-        else
-            return false;
+        return signInUser(username, email, password) === true);
     }
 
     @Mutation(() => Boolean)
