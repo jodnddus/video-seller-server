@@ -21,15 +21,15 @@ export const getUserById = (id: number): usersSchema => {
     const filteredUsers = Users.filter(user => user.id === id); 
     return filteredUsers[0];
 }
-export const addStarVideo = (videoId: number, userId: number): boolean => {
-    try {
-        let user = getUserById(userId);
-        user.videoId.push(videoId);
+export const addStarVideo = (argVideoId: number, argUserId: number): boolean => {
+    var userVideoId = getUserById(argUserId).videoId;
+    var searchedVideoId = userVideoId.find(videoId => videoId === argVideoId);
+    if (searchedVideoId == undefined) {
+        userVideoId.push(argVideoId);
         return true;
-    } catch(e) {
-        console.error(e);
-        return false;
     }
+    else
+        return false;
 }
 export const singUpUser = (username: string, email: string, password: string): usersSchema => {
     const newUser: usersSchema = {
@@ -42,10 +42,7 @@ export const singUpUser = (username: string, email: string, password: string): u
     getAllUsers().push(newUser);
     return newUser;
 }
-export const signInUser = (username: string, email: string, password: string): boolean => {
+export const signInUser = (username: string, email: string, password: string): usersSchema | undefined => {
     var searchedUser = getAllUsers().find(user => user.username === username && user.email === email && user.password === password);
-    if(searchedUser === undefined)
-        return false;
-    else
-        return true;
+    return searchedUser;
 }

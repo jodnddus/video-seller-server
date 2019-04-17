@@ -43,21 +43,21 @@ export default class videoSeller {
         return getUserById(id);
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => usersSchema)
     signInUser(@Arg("username") username: string, @Arg("email") email: string, @Arg("password") password: string) {
-        return signInUser(username, email, password) === true);
-    }
-
-    @Mutation(() => Boolean)
-    addStarVideo(@Arg("videoId") videoId: number, @Arg("userId") userId: number) {
-        if(addStarVideo(videoId, userId) == true)
-            return true;
-        else
-            return false;
+        return signInUser(username, email, password);
     }
 
     @Mutation(() => usersSchema)
     signUpUser(@Arg("username") username: string, @Arg("email") email: string, @Arg("password") password: string) {
         return singUpUser(username, email, password);
+    }
+
+    @Mutation(() => Boolean)
+    addStarVideo(@Arg("videoId") videoId: number, @Arg("userId") userId: number) {
+        if (addStarVideo(videoId, userId) == true)
+            return true;
+        else
+            return false;
     }
 };
