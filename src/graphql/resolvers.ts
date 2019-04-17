@@ -3,8 +3,8 @@ import usersSchema from './schemas/userSchema';
 import videoSchema from './schemas/videoSchema';
 import 'reflect-metadata';
 import {    getAllUsers, getUserById, 
-            getVideosByLimitAndId, signInUser, 
-            singUpUser, addStarVideo } from './behavior';
+            getSuggestionVideosById, getVideoById, getVideosByLimit, signInUser, 
+            singUpUser, addStarVideo, getUserByUsername } from './behavior';
 
 @Resolver()
 export default class videoSeller {
@@ -21,26 +21,31 @@ export default class videoSeller {
     }
 
     @Query(() => [videoSchema])
-    async getvideos(@Arg("limit") limit: number) {
+    async getvideosByLimit(@Arg("limit") limit: number) {
         let YTS_API = `https://yts.am/api/v2/list_movies.json?`;
-        return getVideosByLimitAndId(limit, YTS_API);
+        return getVideosByLimit(limit, YTS_API);
+    }
+
+    @Query(() => [videoSchema])
+    async getVideoBySuggest(@Arg("id") id: number) {
+        let YTS_API = `https://yts.am/api/v2/movie_suggestions.json?`;
+        return getSuggestionVideosById(id, YTS_API);
     }
 
     @Query(() => videoSchema)
     async getVideoById(@Arg("id") id: number) {
         let YTS_API = `https://yts.am/api/v2/movie_details.json?`;
-        return getVideosByLimitAndId(id, YTS_API);
-    }
-
-    @Query(() => [videoSchema])
-    async getVideoSuggest(@Arg("id") id: number) {
-        let YTS_API = `https://yts.am/api/v2/movie_suggestions.json?`;
-        return getVideosByLimitAndId(id, YTS_API);
+        return getVideoById(id, YTS_API);
     }
 
     @Query(() => usersSchema)
-    user(@Arg("id") id: number) {
+    getUserById(@Arg("id") id: number) {
         return getUserById(id);
+    }
+
+    @Query(() => usersSchema)
+    getUserByUsername(@Arg("username") username: string) {
+        return getUserByUsername(username);
     }
 
     @Mutation(() => usersSchema)
@@ -54,8 +59,8 @@ export default class videoSeller {
     }
 
     @Mutation(() => Boolean)
-    addStarVideo(@Arg("videoId") videoId: number, @Arg("userId") userId: number) {
-        if (addStarVideo(videoId, userId) == true)
+    addStarVideo(@Arg("videoId") videoId: number, @Arg("username") username: string) {
+        if (addStarVideo(videoId, username) == true)
             return true;
         else
             return false;
