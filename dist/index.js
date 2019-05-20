@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
 const graphql_yoga_1 = require("graphql-yoga");
-const resolvers_1 = require("./graphql/resolvers");
+const resolvers_1 = require("./src/graphql/resolvers");
 /*const server = new GraphQLServer({
     typeDefs: "graphql/schema.graphql",
     resolvers

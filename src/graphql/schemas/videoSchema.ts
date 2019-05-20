@@ -1,4 +1,7 @@
-import { Field, Int, ObjectType, Float} from 'type-graphql';
+import { Field, 
+        Int,
+        ObjectType, 
+        Float} from 'type-graphql';
 import 'reflect-metadata';
 
 @ObjectType()
